@@ -119,6 +119,15 @@ public class LobbyBeitretenPanel extends JPanel {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 			}
+			{
+				JButton btnRegelnAnzeigen = new JButton("Regeln anzeigen");
+				btnRegelnAnzeigen.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						new RegelnFenster();
+					}
+				});
+				buttonPane.add(btnRegelnAnzeigen);
+			}
 		}
 	}
 

@@ -31,6 +31,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 
+import de.ergodirekt.wizard.gui.main.RegelnFenster;
 import de.ergodirekt.wizard.logic.Karte;
 import de.ergodirekt.wizard.logic.Spieler;
 import de.ergodirekt.wizard.server.Kommando;
@@ -70,6 +71,8 @@ public class WizardGameGUI {
 
 	private int tablePanelWidth = 30;
 	private int tablePanelHeight = 20;
+	private JPanel panel;
+	private JButton btnNewButton;
 
 	/**
 	 * Create the application.
@@ -117,6 +120,7 @@ public class WizardGameGUI {
 			blockPanel = new JPanel();
 			blockPanel.setLayout(new BorderLayout(0, 0));
 			blockPanel.add(getTablePanel(), BorderLayout.CENTER);
+			blockPanel.add(getPanel(), BorderLayout.NORTH);
 			blockPanel.add(getStichPanel(), BorderLayout.SOUTH);
 		}
 		return blockPanel;
@@ -531,5 +535,23 @@ public class WizardGameGUI {
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.add(getBtnNewButton());
+		}
+		return panel;
+	}
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new JButton("Regeln anzeigen");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new RegelnFenster();
+				}
+			});
+		}
+		return btnNewButton;
 	}
 }
