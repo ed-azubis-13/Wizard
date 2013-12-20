@@ -166,12 +166,12 @@ public class GamePanel extends JLayeredPane {
 		switch (numberOfPlayers) {
 		case 3:
 			JLabel bgLabel1_1 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel1_1.setLocation(P3_E1_HAND_POSITION);
 			bgLabel1_1.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel1_1, 1);
 			JLabel bgLabel1_2 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel1_2.setLocation(P3_E2_HAND_POSITION);
 			bgLabel1_2.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel1_2, 1);
@@ -192,17 +192,17 @@ public class GamePanel extends JLayeredPane {
 			break;
 		case 4:
 			JLabel bgLabel2_1 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel2_1.setLocation(P4_E1_HAND_POSITION);
 			bgLabel2_1.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel2_1, 1);
 			JLabel bgLabel2_2 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel2_2.setLocation(P4_E2_HAND_POSITION);
 			bgLabel2_2.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel2_2, 1);
 			JLabel bgLabel2_3 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel2_3.setLocation(P4_E3_HAND_POSITION);
 			bgLabel2_3.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel2_3, 1);
@@ -230,22 +230,22 @@ public class GamePanel extends JLayeredPane {
 			break;
 		case 5:
 			JLabel bgLabel3_1 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel3_1.setLocation(P5_E1_HAND_POSITION);
 			bgLabel3_1.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel3_1, 1);
 			JLabel bgLabel3_2 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel3_2.setLocation(P5_E2_HAND_POSITION);
 			bgLabel3_2.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel3_2, 1);
 			JLabel bgLabel3_3 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel3_3.setLocation(P5_E3_HAND_POSITION);
 			bgLabel3_3.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel3_3, 1);
 			JLabel bgLabel3_4 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel3_4.setLocation(P5_E4_HAND_POSITION);
 			bgLabel3_4.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel3_4, 1);
@@ -280,27 +280,27 @@ public class GamePanel extends JLayeredPane {
 			break;
 		case 6:
 			JLabel bgLabel4_1 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel4_1.setLocation(P6_E1_HAND_POSITION);
 			bgLabel4_1.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel4_1, 1);
 			JLabel bgLabel4_2 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel4_2.setLocation(P6_E2_HAND_POSITION);
 			bgLabel4_2.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel4_2, 1);
 			JLabel bgLabel4_3 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel4_3.setLocation(P6_E3_HAND_POSITION);
 			bgLabel4_3.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel4_3, 1);
 			JLabel bgLabel4_4 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel4_4.setLocation(P6_E4_HAND_POSITION);
 			bgLabel4_4.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel4_4, 1);
 			JLabel bgLabel4_5 = new JLabel(new ImageIcon(
-					"img/kartenruecken.png"));
+					getClass().getClassLoader().getResource("img/kartenruecken.png")));
 			bgLabel4_5.setLocation(P6_E5_HAND_POSITION);
 			bgLabel4_5.setSize(CARD_WIDTH, CARD_HEIGHT);
 			add(bgLabel4_5, 1);
@@ -349,7 +349,7 @@ public class GamePanel extends JLayeredPane {
 
 	private JLabel getLBg() {
 		if (lBg == null) {
-			lBg = new JLabel(new ImageIcon("img/bg.png"));
+			lBg = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/bg.png")));
 			lBg.setBounds(0, 0, 700, 600);
 			setLayer(lBg, 0);
 		}
