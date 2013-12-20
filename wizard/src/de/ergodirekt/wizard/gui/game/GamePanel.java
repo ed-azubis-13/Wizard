@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 
 import de.ergodirekt.wizard.gui.main.PopupDialog;
 import de.ergodirekt.wizard.logic.Karte;
+import de.ergodirekt.wizard.shared.WizardLogger;
 
 /**
  * In dieser Klasse wird das Game-Panel initialisiert (Layout + Spiellogik).
@@ -56,7 +57,7 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P6_E3_HAND_POSITION = new Point(315, 11);
 	public static final Point P6_E4_HAND_POSITION = new Point(620, 11);
 	public static final Point P6_E5_HAND_POSITION = new Point(620, 361);
-	
+
 	public static final Point P3_E1_NAME_POSITION = new Point(106, 11);
 	public static final Point P3_E2_NAME_POSITION = new Point(537, 11);
 	public static final Point P4_E1_NAME_POSITION = new Point(10, 162);
@@ -71,7 +72,7 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P6_E3_NAME_POSITION = new Point(231, 11);
 	public static final Point P6_E4_NAME_POSITION = new Point(625, 125);
 	public static final Point P6_E5_NAME_POSITION = new Point(625, 305);
-	
+
 	public static final Point PX_S_STICHE_POSITION = new Point(10, 430);
 	public static final Point P3_E1_STICHE_POSITION = new Point(10, 164);
 	public static final Point P3_E2_STICHE_POSITION = new Point(644, 164);
@@ -87,7 +88,6 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P6_E3_STICHE_POSITION = new Point(316, 124);
 	public static final Point P6_E4_STICHE_POSITION = new Point(588, 124);
 	public static final Point P6_E5_STICHE_POSITION = new Point(588, 282);
-	
 
 	private List<HandkarteLabel> handkarteLabels = new ArrayList<HandkarteLabel>();
 
@@ -109,7 +109,7 @@ public class GamePanel extends JLayeredPane {
 	private JLabel layedCardE3;
 	private JLabel layedCardE4;
 	private JLabel layedCardE5;
-	
+
 	private JLabel sticheP;
 	private JLabel sticheE1;
 	private JLabel sticheE2;
@@ -361,11 +361,13 @@ public class GamePanel extends JLayeredPane {
 	 * @param label
 	 */
 	public void highlight(HandkarteLabel label) {
-		label.setLocation(label.getLocation().x, label.getLocation().y - 30);
+		if (isDran)
+			label.setLocation(label.getLocation().x, label.getLocation().y - 30);
 	}
 
 	public void lowlight(HandkarteLabel label) {
-		label.setLocation(label.getLocation().x, label.getLocation().y + 30);
+		if (isDran)
+			label.setLocation(label.getLocation().x, label.getLocation().y + 30);
 	}
 
 	/**
@@ -560,7 +562,8 @@ public class GamePanel extends JLayeredPane {
 	}
 
 	/**
-	 * Nach ein paar Sekunden verschwinden die Karten und die neuen Handkarten erscheinen links unten.
+	 * Nach ein paar Sekunden verschwinden die Karten und die neuen Handkarten
+	 * erscheinen links unten.
 	 */
 	public void raeumaAuf() {
 		try {
@@ -581,18 +584,19 @@ public class GamePanel extends JLayeredPane {
 	public void trumpfWaehlen(String selectedItem) {
 		gui.trumpfWaehlen(selectedItem);
 	}
-	
+
 	public void zTrumpfTooltipSetzen(String trumpfFarbe, String spielerName) {
 		lTrumpf.setToolTipText("Trumpf: " + trumpfFarbe);
 		lTrumpf.setText(trumpfFarbe);
-		new PopupDialog(this, PopupDialog.IS_INFORMATION_MESSAGE, spielerName + " setzt den Trumpf auf " + trumpfFarbe);
-		if (trumpfFarbe.equals("rot")) 
+		new PopupDialog(this, PopupDialog.IS_INFORMATION_MESSAGE, spielerName
+				+ " setzt den Trumpf auf " + trumpfFarbe);
+		if (trumpfFarbe.equals("rot"))
 			lTrumpf.setForeground(Color.RED);
-		if (trumpfFarbe.equals("gruen")) 
+		if (trumpfFarbe.equals("gruen"))
 			lTrumpf.setForeground(Color.GREEN);
-		if (trumpfFarbe.equals("blau")) 
+		if (trumpfFarbe.equals("blau"))
 			lTrumpf.setForeground(Color.BLUE);
-		if (trumpfFarbe.equals("gelb")) 
+		if (trumpfFarbe.equals("gelb"))
 			lTrumpf.setForeground(Color.YELLOW);
 	}
 
@@ -600,7 +604,8 @@ public class GamePanel extends JLayeredPane {
 		new TrumpfWaehler(this);
 	}
 
-	public void setzeNamen(String string, Integer playerPos, Integer currentPos, int listSize) {
+	public void setzeNamen(String string, Integer playerPos,
+			Integer currentPos, int listSize) {
 		remove(getLBg());
 		JLabel nameLabel = new JLabel(string);
 		nameLabel.setSize(100, 20);
@@ -693,7 +698,7 @@ public class GamePanel extends JLayeredPane {
 		validate();
 		repaint();
 	}
-		
+
 	public boolean isSticheAngesagt() {
 		return sticheAngesagt;
 	}
@@ -702,53 +707,59 @@ public class GamePanel extends JLayeredPane {
 		this.sticheAngesagt = sticheAngesagt;
 	}
 
-	public void setzeStiche(int stiche, Integer playerPos, Integer currentPos, int listSize) {
+	public void setzeStiche(int stiche, Integer playerPos, Integer currentPos,
+			int listSize) {
 		remove(getLBg());
+		WizardLogger.info("Setze Stiche...");
+		WizardLogger.info("Stiche: " + stiche);
+		if(playerPos == currentPos) {
+			sticheP.setText("" + stiche);
+		}
 		switch (numberOfPlayers) {
 		case 3:
 			if (playerPos == currentPos + 1
 					|| (currentPos == listSize - 1 && playerPos == 0)) {
-				sticheE1.setText(""+stiche);
+				sticheE1.setText("" + stiche);
 			} else {
-				sticheE2.setText(""+stiche);
+				sticheE2.setText("" + stiche);
 			}
 			break;
 		case 4:
 			if (playerPos == currentPos + 1
 					|| (currentPos == listSize - 1 && playerPos == 0)) {
-				sticheE1.setText(""+stiche);
+				sticheE1.setText("" + stiche);
 			} else {
 				int x = currentPos + 2;
 				if (x >= listSize)
 					x = x - listSize;
 				if (playerPos == x
 						|| (currentPos == listSize - 1 && playerPos == 1)) {
-					sticheE2.setText(""+stiche);
+					sticheE2.setText("" + stiche);
 				} else {
-					sticheE3.setText(""+stiche);
+					sticheE3.setText("" + stiche);
 				}
 			}
 			break;
 		case 5:
 			if (playerPos == currentPos + 1
 					|| (currentPos == listSize - 1 && playerPos == 0)) {
-				sticheE1.setText(""+stiche);
+				sticheE1.setText("" + stiche);
 			} else {
 				int x = currentPos + 2;
 				if (x >= listSize)
 					x = x - listSize;
 				if (playerPos == x
 						|| (currentPos == listSize - 1 && playerPos == 1)) {
-					sticheE2.setText(""+stiche);
+					sticheE2.setText("" + stiche);
 				} else {
 					int y = currentPos + 3;
 					if (y >= listSize)
 						y = y - listSize;
 					if (playerPos == y
 							|| (currentPos == listSize - 1 && playerPos == 2)) {
-						sticheE3.setText(""+stiche);
+						sticheE3.setText("" + stiche);
 					} else {
-						sticheE4.setText(""+stiche);
+						sticheE4.setText("" + stiche);
 					}
 				}
 			}
@@ -756,30 +767,30 @@ public class GamePanel extends JLayeredPane {
 		case 6:
 			if (playerPos == currentPos + 1
 					|| (currentPos == listSize - 1 && playerPos == 0)) {
-				sticheE1.setText(""+stiche);
+				sticheE1.setText("" + stiche);
 			} else {
 				int x = currentPos + 2;
 				if (x >= listSize)
 					x = x - listSize;
 				if (playerPos == x
 						|| (currentPos == listSize - 1 && playerPos == 1)) {
-					sticheE2.setText(""+stiche);
+					sticheE2.setText("" + stiche);
 				} else {
 					int y = currentPos + 3;
 					if (y >= listSize)
 						y = y - listSize;
 					if (playerPos == y
 							|| (currentPos == listSize - 1 && playerPos == 2)) {
-						sticheE3.setText(""+stiche);
+						sticheE3.setText("" + stiche);
 					} else {
 						int z = currentPos + 4;
 						if (z >= listSize)
 							z = z - listSize;
 						if (playerPos == z
 								|| (currentPos == listSize - 1 && playerPos == 3)) {
-							sticheE4.setText(""+stiche);
+							sticheE4.setText("" + stiche);
 						} else {
-							sticheE5.setText(""+stiche);
+							sticheE5.setText("" + stiche);
 						}
 					}
 				}

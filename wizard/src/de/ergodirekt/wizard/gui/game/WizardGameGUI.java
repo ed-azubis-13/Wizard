@@ -489,8 +489,6 @@ public class WizardGameGUI {
 				break;
 			}
 		}
-		System.out.println(index);
-		System.out.println("Hi!");
 		for (int i = 1; i < userList.size(); i++) {
 			int index2 = i + index;
 			if (index2 >= userList.size()) {
@@ -509,9 +507,7 @@ public class WizardGameGUI {
 				break;
 			}
 		}
-		System.out.println(index);
-		System.out.println("Hi!");
-		for (int i = 1; i < userList.size(); i++) {
+		for (int i = 0; i < userList.size(); i++) {
 			int index2 = i + index;
 			if (index2 >= userList.size()) {
 				index2 = index2 - userList.size();

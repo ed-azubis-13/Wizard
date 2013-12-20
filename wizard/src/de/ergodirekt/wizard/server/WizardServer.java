@@ -17,6 +17,7 @@ import de.ergodirekt.wizard.logic.Spiel;
 import de.ergodirekt.wizard.logic.Spieler;
 import de.ergodirekt.wizard.logic.Stich;
 import de.ergodirekt.wizard.shared.User;
+import de.ergodirekt.wizard.shared.WizardLogger;
 /**
  * Diese Klasse erzeugt einen neuen Server und nimmt Befehle entgegen und verarbeitet diese.
  * @author Tobias
@@ -251,11 +252,14 @@ public class WizardServer implements Runnable {
 					initializeGame(v);
 				}
 			} else {
+				amZug = spiel.getStichSieger();
 				Kommando kdo2 = new Kommando();
 				kdo2.setKommando("sticheSchreiben");
 				kdo2.addParameter((Serializable) cloneSpielerListe(spiel.getSpielerListe()));
+				for (Spieler s : spiel.getSpielerListe()) {
+					WizardLogger.info("Stiche: " + s.getStiche());
+				}
 				sendeAnAlle(kdo2);
-				amZug = spiel.getStichSieger();
 				spiel.setStarter(amZug);
 				Verbindung v = verbindungen.get(amZug);
 				Kommando kdo = new Kommando();
