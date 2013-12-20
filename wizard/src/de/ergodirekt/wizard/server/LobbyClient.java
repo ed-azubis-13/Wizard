@@ -104,7 +104,7 @@ public class LobbyClient implements Runnable {
 							"Disconnected: Server shutting down.");
 					gui.getFrame().dispose();
 				}
-
+				WizardLogger.error("Error: ", e);
 			}
 		}
 		WizardLogger.info("Client shutting down...");
