@@ -32,7 +32,7 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P3_E1_LAYDOWN_POSITION = new Point(183, 139);
 	public static final Point P3_E2_LAYDOWN_POSITION = new Point(437, 139);
 	public static final Point P4_E1_LAYDOWN_POSITION = new Point(185, 250);
-	public static final Point P4_E2_LAYDOWN_POSITION = new Point(315, 104);
+	public static final Point P4_E2_LAYDOWN_POSITION = new Point(315, 122);
 	public static final Point P4_E3_LAYDOWN_POSITION = new Point(443, 250);
 	public static final Point P5_E1_LAYDOWN_POSITION = new Point(185, 304);
 	public static final Point P5_E2_LAYDOWN_POSITION = new Point(185, 102);
@@ -40,7 +40,7 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P5_E4_LAYDOWN_POSITION = new Point(441, 304);
 	public static final Point P6_E1_LAYDOWN_POSITION = new Point(185, 304);
 	public static final Point P6_E2_LAYDOWN_POSITION = new Point(185, 102);
-	public static final Point P6_E3_LAYDOWN_POSITION = new Point(315, 102);
+	public static final Point P6_E3_LAYDOWN_POSITION = new Point(315, 122);
 	public static final Point P6_E4_LAYDOWN_POSITION = new Point(438, 102);
 	public static final Point P6_E5_LAYDOWN_POSITION = new Point(438, 304);
 	public static final Point P3_E1_HAND_POSITION = new Point(10, 11);
@@ -48,15 +48,15 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P4_E1_HAND_POSITION = new Point(10, 204);
 	public static final Point P4_E2_HAND_POSITION = new Point(315, 11);
 	public static final Point P4_E3_HAND_POSITION = new Point(620, 204);
-	public static final Point P5_E1_HAND_POSITION = new Point(10, 361);
+	public static final Point P5_E1_HAND_POSITION = new Point(10, 341);
 	public static final Point P5_E2_HAND_POSITION = new Point(10, 11);
 	public static final Point P5_E3_HAND_POSITION = new Point(620, 11);
-	public static final Point P5_E4_HAND_POSITION = new Point(620, 361);
-	public static final Point P6_E1_HAND_POSITION = new Point(10, 361);
+	public static final Point P5_E4_HAND_POSITION = new Point(620, 341);
+	public static final Point P6_E1_HAND_POSITION = new Point(10, 341);
 	public static final Point P6_E2_HAND_POSITION = new Point(10, 11);
 	public static final Point P6_E3_HAND_POSITION = new Point(315, 11);
 	public static final Point P6_E4_HAND_POSITION = new Point(620, 11);
-	public static final Point P6_E5_HAND_POSITION = new Point(620, 361);
+	public static final Point P6_E5_HAND_POSITION = new Point(620, 341);
 
 	public static final Point P3_E1_NAME_POSITION = new Point(106, 11);
 	public static final Point P3_E2_NAME_POSITION = new Point(537, 11);
@@ -77,7 +77,7 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P3_E1_STICHE_POSITION = new Point(10, 164);
 	public static final Point P3_E2_STICHE_POSITION = new Point(644, 164);
 	public static final Point P4_E1_STICHE_POSITION = new Point(10, 294);
-	public static final Point P4_E2_STICHE_POSITION = new Point(316, 124);
+	public static final Point P4_E2_STICHE_POSITION = new Point(231, 40);
 	public static final Point P4_E3_STICHE_POSITION = new Point(644, 294);
 	public static final Point P5_E1_STICHE_POSITION = new Point(53, 282);
 	public static final Point P5_E2_STICHE_POSITION = new Point(53, 124);
@@ -85,7 +85,7 @@ public class GamePanel extends JLayeredPane {
 	public static final Point P5_E4_STICHE_POSITION = new Point(588, 282);
 	public static final Point P6_E1_STICHE_POSITION = new Point(53, 282);
 	public static final Point P6_E2_STICHE_POSITION = new Point(53, 124);
-	public static final Point P6_E3_STICHE_POSITION = new Point(316, 124);
+	public static final Point P6_E3_STICHE_POSITION = new Point(231, 40);
 	public static final Point P6_E4_STICHE_POSITION = new Point(588, 124);
 	public static final Point P6_E5_STICHE_POSITION = new Point(588, 282);
 
@@ -219,7 +219,7 @@ public class GamePanel extends JLayeredPane {
 			sticheE2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			sticheE2.setForeground(Color.YELLOW);
 			sticheE2.setLocation(P4_E2_STICHE_POSITION);
-			add(sticheE1, 1);
+			add(sticheE2, 1);
 			sticheE3 = new JLabel();
 			sticheE3.setText("0");
 			sticheE3.setSize(new Dimension(50, 50));
@@ -378,6 +378,16 @@ public class GamePanel extends JLayeredPane {
 	public void addHandCards(List<Karte> handkarten) {
 		remove(getLBg());
 		int counter = 0;
+		try {
+		sticheP.setText("0");
+		sticheE1.setText("0");
+		sticheE2.setText("0");
+		sticheE3.setText("0");
+		sticheE4.setText("0");
+		sticheE5.setText("0");
+		} catch (Exception e) {
+			// do nothing
+		}
 		handkarteLabels = new ArrayList<HandkarteLabel>();
 		setSticheAngesagt(false);
 		for (Karte karte : handkarten) {
@@ -586,18 +596,25 @@ public class GamePanel extends JLayeredPane {
 	}
 
 	public void zTrumpfTooltipSetzen(String trumpfFarbe, String spielerName) {
+		remove(getLBg());
 		lTrumpf.setToolTipText("Trumpf: " + trumpfFarbe);
-		lTrumpf.setText(trumpfFarbe);
+		remove(lTrumpf);
+		JLabel lTrumpfText = new JLabel(trumpfFarbe);
+		lTrumpfText.setSize(new Dimension(150, 150));
+		lTrumpfText.setLocation(STACK_POSITION.x + 27, STACK_POSITION.y - 30);
+		if (trumpfFarbe.equals("rot"))
+			lTrumpfText.setForeground(Color.RED);
+		if (trumpfFarbe.equals("gruen"))
+			lTrumpfText.setForeground(Color.GREEN);
+		if (trumpfFarbe.equals("blau"))
+			lTrumpfText.setForeground(Color.BLUE);
+		if (trumpfFarbe.equals("gelb"))
+			lTrumpfText.setForeground(Color.YELLOW);
+		add(lTrumpfText, 10);
 		new PopupDialog(this, PopupDialog.IS_INFORMATION_MESSAGE, spielerName
 				+ " setzt den Trumpf auf " + trumpfFarbe);
-		if (trumpfFarbe.equals("rot"))
-			lTrumpf.setForeground(Color.RED);
-		if (trumpfFarbe.equals("gruen"))
-			lTrumpf.setForeground(Color.GREEN);
-		if (trumpfFarbe.equals("blau"))
-			lTrumpf.setForeground(Color.BLUE);
-		if (trumpfFarbe.equals("gelb"))
-			lTrumpf.setForeground(Color.YELLOW);
+		add(lTrumpf);
+		add(getLBg());
 	}
 
 	public void fordereWaehlen() {

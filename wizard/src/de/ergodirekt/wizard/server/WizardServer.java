@@ -146,6 +146,7 @@ public class WizardServer implements Runnable {
 			playerList.add(new Spieler(u.getName()));
 		}
 		spiel = new Spiel(playerList);
+		spiel.setTrumpf(new Karte(14, Kartenstapel.KEINE_FARBE, new ImageIcon("img/z4.png")));
 		Kommando kdo = new Kommando();
 		kdo.setKommando("startGame");
 		sendeAnAlle(kdo);
