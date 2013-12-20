@@ -39,8 +39,8 @@ public class Kartenstapel {
 		}
 		// Zauberer und Narren
 		for (int i = 1; i <= FARBEN.length; i++) {
-			karten.add(new Karte(0, KEINE_FARBE, new ImageIcon("img/n" + i + ".png")));
-			karten.add(new Karte(14, KEINE_FARBE, new ImageIcon("img/z" + i + ".png")));
+			karten.add(new Karte(0, KEINE_FARBE, new ImageIcon(getClass().getClassLoader().getResource("img/n" + i + ".png"))));
+			karten.add(new Karte(14, KEINE_FARBE, new ImageIcon(getClass().getClassLoader().getResource("img/z" + i + ".png"))));
 		}
 	}
 
@@ -58,7 +58,7 @@ public class Kartenstapel {
 			tempkarte = karten.get(rnd);
 			karten.remove(rnd);
 		} else {
-			tempkarte = new Karte(0, KEINE_FARBE, new ImageIcon("img/leer.png"));
+			tempkarte = new Karte(0, KEINE_FARBE, new ImageIcon(getClass().getClassLoader().getResource("img/leer.png")));
 		}
 
 		return tempkarte;

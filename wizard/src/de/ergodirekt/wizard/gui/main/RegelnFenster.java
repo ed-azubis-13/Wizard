@@ -46,14 +46,14 @@ public class RegelnFenster extends JFrame {
 	}
 	private JLabel getLRegeln1() {
 		if (lRegeln1 == null) {
-			lRegeln1 = new JLabel(new ImageIcon("img/regeln1.png"));
+			lRegeln1 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/regeln1.png")));
 			lRegeln1.setSize(new Dimension(870, 2477));
 		}
 		return lRegeln1;
 	}
 	private JLabel getLRegeln2() {
 		if (lRegeln2 == null) {
-			lRegeln2 = new JLabel(new ImageIcon("img/regeln2.png"));
+			lRegeln2 = new JLabel(new ImageIcon(getClass().getClassLoader().getResource("img/regeln2.png")));
 			lRegeln2.setSize(new Dimension(871, 2473));
 		}
 		return lRegeln2;
