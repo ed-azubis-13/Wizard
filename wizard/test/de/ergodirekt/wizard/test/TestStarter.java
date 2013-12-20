@@ -20,7 +20,6 @@ public class TestStarter {
 				}
 			}
 		});
-//		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

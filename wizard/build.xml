@@ -6,7 +6,7 @@ Infos unter: http://ant.apache.org/manual/index.html
 Infos zum Zugiff auf die Grafiken aus dem Jar-File heraus:
 	http://www.leepoint.net/notes-java/GUI-lowlevel/graphics/45imageicon.html
 	
---> 
+-->
 <project name="Wizard" default="deploy" basedir=".">
 
 	<property name="appName" value="wizard" />
@@ -16,7 +16,18 @@ Infos zum Zugiff auf die Grafiken aus dem Jar-File heraus:
 			<fileset dir="${basedir}/bin">
 				<include name="**/*.*" />
 			</fileset>
-			<!-- TODO: Start-Klasse angeben! -->
+			<manifest>
+				<attribute name="Main-Class" value="de.ergodirekt.wizard.Starter" />
+				<attribute name="Class-Path" value="steelseries-3.9.30.jar" />
+			</manifest>
+		</jar>
+		<jar jarfile="${appName}Server.jar">
+			<fileset dir="${basedir}/bin">
+				<include name="**/*.*" />
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="de.ergodirekt.wizard.StarterServer" />
+			</manifest>
 		</jar>
 	</target>
 </project>

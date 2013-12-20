@@ -33,7 +33,7 @@ public class Kartenstapel {
 		// Für jede Farbe die Karten von 1-13
 		for (int i = 0; i < FARBEN.length; i++) {	
 			for (int j = 1; j <= 13; j++) {
-				karten.add(new Karte(j, FARBEN[i], new ImageIcon("img/" + FARBEN[i] + j + ".png")));
+				karten.add(new Karte(j, FARBEN[i], new ImageIcon(getClass().getClassLoader().getResource("img/" + FARBEN[i] + j + ".png"))));
 
 			}
 		}
