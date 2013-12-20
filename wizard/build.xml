@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<!--
+Infos unter: http://ant.apache.org/manual/index.html
+
+Infos zum Zugiff auf die Grafiken aus dem Jar-File heraus:
+	http://www.leepoint.net/notes-java/GUI-lowlevel/graphics/45imageicon.html
+	
+--> 
+<project name="Wizard" default="deploy" basedir=".">
+
+	<property name="appName" value="wizard" />
+
+	<target name="deploy">
+		<jar jarfile="${appName}.jar">
+			<fileset dir="${basedir}/bin">
+				<include name="**/*.*" />
+			</fileset>
+			<!-- TODO: Start-Klasse angeben! -->
+		</jar>
+	</target>
+</project>
+
